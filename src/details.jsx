@@ -1,23 +1,39 @@
 import React from 'react';
 import "./list_style.css";
-import data from "./data.json"
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-function Details() {
-  const newdata = data.map((item) => {
+const Details = () => {
+  const [tasksData, setData] = useState([]); 
+  
+  useEffect(() =>{
+    const loadData = async () =>{
+      const response = await axios.get('/api/tasks');
+      const newTaskData = response.data;
+      setData(newTaskData);
+
+    }
+
+     loadData();
+  } ); 
+  
+  const newdata = tasksData.map((item) => {
     return (
+      <>
       <tr key={item.taskName}>
         <td>{item.taskName}</td>
         <td>{item.taskCategory}</td>
         <td>{item.dueDate}</td>
         <td>{item.status}</td>
         <td>{item.location}</td>
-      </tr>
+      </tr></>
+      
     );
   });
 
   return (
     <div>
-  <table class="steven">
+  <table className="steven">
     <thead>
       <tr>
         <th>Task name</th>

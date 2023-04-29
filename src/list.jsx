@@ -1,92 +1,73 @@
 import React from 'react'
 import './list_style.css';
-function List() {
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+
+const List = () => {
+    const [tasksData, setData] = useState([]); 
+  
+  useEffect(() =>{
+    const loadData = async () =>{
+      const response = await axios.get('/api/tasks');
+      const newTaskData = response.data;
+      setData(newTaskData);
+
+    }
+
+     loadData();
+    });
+    
+    const completeTask = async (name) => {
+        const response  = await axios.put(`/api/details/${name}/updateStatus`);
+        const updatedTaskData = response.data;
+        setData(updatedTaskData);
+    }
+
+    const deleTask = async (name) => {
+        const response = await axios.put(`/api/${name}/delete`);
+        const updatedTaskData = response.data;
+        setData(updatedTaskData);
+
+    }
+    
+    const newdata = tasksData.map((item) => {
+        return (
+            <>
+                <div className="item">
+                    <span><a href="#default">{item.taskName}</a></span>
+                    <div className="category">{item.taskCategory}</div>
+                    <div className="button_container">
+                        <form className='action_button_container'>
+                            <button className="action_button" onClick={() => completeTask(item.taskName)}>
+                            Complete 
+                            </button> |
+                        </form>
+                        <form className='action_button_container'>
+                            <button className="action_button" onClick={() => deleTask(item.taskName)}>
+                            Delete
+                            </button>
+                        </form>
+                    </div>
+                    <div className="priority">c</div>
+                </div>
+                
+            </>
+        );
+    });
+    
+    
+    
     return (
-      <>
-        
-
-<h2><span >Must Do List</span></h2>
-<div className="list_container">
-    <div className="item" id="item-1">
-        <span><a href="#default">Do this</a></span>
-        <div class="category">Work</div>
-        
-        <div class="button_container">
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Update 
-                </button> |
-            </form>
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Delete
-                </button>
-            </form>
-        </div>
-        <div className="priority">c</div>
-    </div>
-
-    <div className="item" id="item-2">
-        <span><a href="#default">Do these</a></span>
-        <div className="category">personal</div>
-        
-        <div className="button_container">
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Update 
-                </button> |
-            </form>
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Delete
-                </button>
-            </form>
-        </div>
-        <div className="priority">c</div>
-    </div>
-
-    <div className="item" id="item-3">
-        <span><a href="#default">Do them</a></span>
-        <div className="category">School</div>
-        
-        <div class="button_container">
-            <form className='action_button_container' action="detail.html" method="get">
-                <button class="action_button">
-                Update 
-                </button> |
-            </form>
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Delete
-                </button>
-            </form>
-        </div>
-        <div className="priority">c</div>
-    </div>
-
-    <div className="item" id="item-4">
-        <span><a href="#default">Do that</a></span>
-        <div className="category">personal</div>
-        
-        <div className="button_container">
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Update 
-                </button> |
-            </form>
-            <form className='action_button_container' action="detail.html" method="get">
-                <button className="action_button">
-                Delete
-                </button>
-            </form>
-        </div>
-        <div className="priority">c</div>
-    </div>
-</div>
-<footer>© 2023 Must Do It</footer>
-      </>
+        <>
+            <h2><span >Must Do List</span></h2>
+            <div className="list_container">
+                {newdata}
+            </div>
+            <footer>© 2023 Must Do It</footer>
+        </>
     );
   
-  }
+}
 
 export default List;

@@ -14,6 +14,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+To set up database via CLI, ensure mongodb and mongosh are installed.
+run thr command 
+### `mongosh`
+ to start a mongoDB shell. After which, enter:
+
+### `use react-tasks-db` 
+to create a new database. The next query to be run after that populates the task collection with initial data and can be found in src/backend/src/milestone3_createDB.txt
+
+In a new terminal navigate to src/backend/ and start the server by running:
+### `node src/server.js`
+This will run the server on http://localhost:8000
+
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\

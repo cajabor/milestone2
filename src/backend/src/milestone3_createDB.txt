@@ -1,0 +1,26 @@
+use react-tasks-db
+db.tasks.insertMany([
+ 
+    {
+    taskName: "Task1",
+    taskCategory: "Work",
+    dueDate: "2023-04-18",
+    status: "in progress", 
+    location: "Work"
+    },
+
+    {
+    taskName: "Task2",
+    taskCategory: "School",
+    dueDate: "2023-04-16",
+    status: "not started", 
+    location: "School"
+    },
+    
+    {
+    taskName: "Task3",
+    taskCategory: "House",
+    dueDate: "2023-04-28",
+    status: "started", 
+    location: "home"
+    }])

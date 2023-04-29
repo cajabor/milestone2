@@ -8,7 +8,6 @@ import {BrowserRouter as Router, Link,
  import './list_style.css';
  import Signin from './Signin';
 
-
 function App() {
   return (
     <>
@@ -16,7 +15,7 @@ function App() {
         <div className="logo">
           <img src = {logo} alt="Logo" id="banner_logo" /><br />
           Must Do It
-        </div>
+        </div> 
         <aside>
         <Signin />
         </aside>
@@ -44,3 +43,7 @@ function App() {
 }
 
 export default App;
+
+
+//
+//const data = response.data;
