@@ -1,13 +1,18 @@
-import express from 'express';
-import { MongoClient } from 'mongodb';
+const { MongoClient } = require('mongodb');
+const express = require('express');
+
+const serverless = require('serverless-http');
+
 const app = express();
 app.use(express.json());
- 
 
-app.get('/api/tasks/:name', async (req, res) => {
+const router = express.Router();
+ 
+const mongoUrl = 'mongodb+srv://cajabor2018:NKcvTG6OokCVCkmX@cluster0.tvh57o9.mongodb.net/test';
+router.get('/tasks/:name', async (req, res) => {
     const { name } = req.params
     console.log(name)
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoUrl);
     await client.connect()
  
     const db = client.db('react-tasks-db');
@@ -20,9 +25,9 @@ app.get('/api/tasks/:name', async (req, res) => {
     }
 });
 
-app.get('/api/tasks', async (req, res) => {
-    
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+router.get('/tasks', async (req, res) => {
+     
+    const client = new MongoClient(mongoUrl);
     await client.connect()
  
     const db = client.db('react-tasks-db');
@@ -35,10 +40,10 @@ app.get('/api/tasks', async (req, res) => {
     }
 });
 
-app.put('/api/details/:name/updateStatus', async (req, res) => {
+router.put('/details/:name/updateStatus', async (req, res) => {
     const { name } = req.params;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoUrl);
     await client.connect()
 
     const db = client.db('react-tasks-db');
@@ -60,16 +65,16 @@ app.put('/api/details/:name/updateStatus', async (req, res) => {
 });
 
 
-app.post('/api/createnew/', async (req, res) => {
+router.post('/createnew/', async (req, res) => {
     const { taskID, taskName, taskCategory, dueDate, status, location } = req.body;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoUrl);
     await client.connect()
 
     const db = client.db('react-tasks-db');
     const response = await db.collection('tasks').insertOne({
         taskID, taskName, taskCategory, dueDate, status, location
-    });
+    }); 
 
     db.collection('tasks').find({}).toArray(function(err, docs){
         res.send(docs);
@@ -77,10 +82,10 @@ app.post('/api/createnew/', async (req, res) => {
  
 });
 
-app.put('/api/:name/delete', async (req, res) =>{
+router.put('/:name/delete', async (req, res) =>{
     
     const {name} = req.params;
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoUrl);
     await client.connect()
 
     const db = client.db('react-tasks-db');
@@ -91,6 +96,11 @@ app.put('/api/:name/delete', async (req, res) =>{
         res.send(docs);
     });
 });
-app.listen(8000, () => { 
-    console.log('serve is listening on port 8000');
-});
+
+//  router.listen(8000, () => { 
+//      console.log('serve is listening on port 8000');
+//  });
+ 
+
+app.use('/.netlify/netlify_functions/api', router);
+module.exports.handler = serverless(app);
