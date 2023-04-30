@@ -1,6 +1,6 @@
 import React from 'react';
 import "./list_style.css";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const Createnew = () => {
@@ -11,7 +11,7 @@ const Createnew = () => {
   const [location, setLocation] = useState("");
 
   const createNewTask = async () =>{
-    const response = await axios.post('/api/createnew/', {
+      await axios.post('/api/createnew/', {
       taskName: taskName,
       taskCategory: taskCategory,
       dueDate: dueDate,
