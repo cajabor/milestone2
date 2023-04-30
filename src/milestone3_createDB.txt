@@ -24,3 +24,6 @@ db.tasks.insertMany([
     status: "started", 
     location: "home"
     }])
+
+    "start": "node ./src/server.js",
+    "build": "netlfiy-lambda build src"
