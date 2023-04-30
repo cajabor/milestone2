@@ -102,5 +102,5 @@ router.put('/:name/delete', async (req, res) =>{
 //  });
  
 
-app.use('/.netlify/functions/server', router);
+app.use('/.netlify/functions/express', router);
 module.exports.handler = serverless(app);
