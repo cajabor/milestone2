@@ -3,11 +3,11 @@ import { MongoClient } from 'mongodb';
 const app = express();
 app.use(express.json());
  
-
+const mongoURL = 'mongodb+srv://cajabor2018:NKcvTG6OokCVCkmX@cluster0.tvh57o9.mongodb.net/test';
 app.get('/api/tasks/:name', async (req, res) => {
     const { name } = req.params
     console.log(name)
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoURL);
     await client.connect()
  
     const db = client.db('react-tasks-db');
@@ -22,7 +22,7 @@ app.get('/api/tasks/:name', async (req, res) => {
 
 app.get('/api/tasks', async (req, res) => {
     
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoURL);
     await client.connect()
  
     const db = client.db('react-tasks-db');
@@ -38,7 +38,7 @@ app.get('/api/tasks', async (req, res) => {
 app.put('/api/details/:name/updateStatus', async (req, res) => {
     const { name } = req.params;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoURL);
     await client.connect()
 
     const db = client.db('react-tasks-db');
@@ -63,7 +63,7 @@ app.put('/api/details/:name/updateStatus', async (req, res) => {
 app.post('/api/createnew/', async (req, res) => {
     const { taskID, taskName, taskCategory, dueDate, status, location } = req.body;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoURL);
     await client.connect()
 
     const db = client.db('react-tasks-db');
@@ -80,7 +80,7 @@ app.post('/api/createnew/', async (req, res) => {
 app.put('/api/:name/delete', async (req, res) =>{
     
     const {name} = req.params;
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(mongoURL);
     await client.connect()
 
     const db = client.db('react-tasks-db');
