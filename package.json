@@ -23,8 +23,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start && netlify-lambda serve ./src/backend/src",
-    "build": "react-scripts build && netlify-lambda build ./src/backend/src",
+    "start": "react-scripts start && netlify-lambda serve functions",
+    "build": "react-scripts build && netlify-lambda build functions",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
