@@ -3,11 +3,7 @@ import { MongoClient } from 'mongodb';
 const app = express();
 app.use(express.json());
  
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://guileless-quokka-8e312d.netlify.app"); 
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
+
 const mongoURL = 'mongodb+srv://cajabor2018:NKcvTG6OokCVCkmX@cluster0.tvh57o9.mongodb.net/test';
 app.get('/api/tasks/:name', async (req, res) => {
     const { name } = req.params
