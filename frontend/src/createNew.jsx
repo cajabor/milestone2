@@ -11,7 +11,7 @@ const Createnew = () => {
   const [location, setLocation] = useState("");
 
   const createNewTask = async () =>{
-      await axios.post('/api/createnew/', {
+      await axios.post('https://react-backend-nv65.onrender.com/api/createnew/', {
       taskName: taskName,
       taskCategory: taskCategory,
       dueDate: dueDate,

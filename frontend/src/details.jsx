@@ -8,7 +8,7 @@ const Details = () => {
   
   useEffect(() =>{
     const loadData = async () =>{
-      const response = await axios.get('/api/tasks');
+      const response = await axios.get('https://react-backend-nv65.onrender.com/api/tasks');
       const newTaskData = response.data;
       setData(newTaskData);
 

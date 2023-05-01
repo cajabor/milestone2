@@ -9,7 +9,7 @@ const List = () => {
   
   useEffect(() =>{
     const loadData = async () =>{
-      const response = await axios.get('/api/tasks');
+      const response = await axios.get('https://react-backend-nv65.onrender.com/api/tasks');
       const newTaskData = response.data;
       setData(newTaskData);
 
@@ -19,13 +19,13 @@ const List = () => {
     });
     
     const completeTask = async (name) => {
-        const response  = await axios.put(`/api/details/${name}/updateStatus`);
+        const response  = await axios.put(`https://react-backend-nv65.onrender.com/api/details/${name}/updateStatus`);
         const updatedTaskData = response.data;
         setData(updatedTaskData);
     }
 
     const deleTask = async (name) => {
-        const response = await axios.put(`/api/${name}/delete`);
+        const response = await axios.put(`https://react-backend-nv65.onrender.com/api/${name}/delete`);
         const updatedTaskData = response.data;
         setData(updatedTaskData);
 
