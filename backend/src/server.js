@@ -8,7 +8,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
-const mongoURL = 'mongodb+srv://cajabor2018:NKcvTG6OokCVCkmX@cluster0.tvh57o9.mongodb.net/test';
+const mongoURL = 'mongodb+srv://cajabor2018:NKcvTG6OokCVCkmX@cluster0.pxbkleu.mongodb.net/test';
 app.get('/api/tasks/:name', async (req, res) => {
     const { name } = req.params
     console.log(name)
