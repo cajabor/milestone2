@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "proxy": "https://react-backend-nv65.onrender.com",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.js",
