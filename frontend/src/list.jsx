@@ -34,7 +34,7 @@ const List = () => {
     const newdata = tasksData.map((item) => {
         return (
             <>
-                <div className="item">
+                <div className="item" >
                     <span><a href="#default">{item.taskName}</a></span>
                     <div className="category">{item.taskCategory}</div>
                     <div className="button_container">
