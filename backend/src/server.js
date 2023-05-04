@@ -3,10 +3,13 @@ import { MongoClient } from 'mongodb';
 const app = express();
 app.use(express.json());
 
+//server was tested on:
 //https://guileless-quokka-8e312d.netlify.app
-//http://localhost:3000
+//change access control to localhost 3000 to be able to communicate with server
+// from local host if not run mongodb locally and change the endpoints in list.jsx, createnew.jsx, and details.jsx
+
  app.use(function(req, res, next) {
-     res.header("Access-Control-Allow-Origin", ["http://localhost", "https://guileless-quokka-8e312d.netlify.app"]); 
+     res.header("Access-Control-Allow-Origin", "https://guileless-quokka-8e312d.netlify.app"); 
      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
      next();
    });
